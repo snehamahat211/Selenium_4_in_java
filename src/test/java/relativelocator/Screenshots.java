@@ -5,8 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,14 +17,16 @@ import java.io.IOException;
 public class Screenshots  {
     WebDriver driver;
 
+    @BeforeMethod
     public void setup() {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://applitools.com/");
 
     }
 
+    @Test
     public void takeWebElementScreenshot() {
         WebElement nextGenerationPlatform = driver.findElement
                 (By.id("h-fast-scalable-reliable-deterministic-ai-tests-that-never-hallucinate"));
