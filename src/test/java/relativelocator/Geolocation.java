@@ -10,30 +10,30 @@ import java.util.Map;
 
 import static javax.swing.UIManager.put;
 
-public class Geolocation
-{
+public class Geolocation {
+
     ChromeDriver driver;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
+
     @Test
     public void GeolocationTest() {
-        Map coordinates = new HashMap();
-        {
-            {
-                put("lat", 51.0);
-                put("lng", 2.0);
-                put("accuracy", 1);
-            }
-        }
 
-        {
-            driver.executeCdpCommand("Emulatuion.setGeolocationOverride",coordinates );
+        Map<String, Object> coordinates = new HashMap<>();
+        put("lat", 32.746940);
+        put("lng", -97.092400);
+        put("accuracy", 1);
 
-        }
+        driver.executeCdpCommand(
+                "Emulation.setGeolocationOverride",
+                coordinates
+        );
+
+        driver.get("https://where-am-i.org/");
     }
 }
